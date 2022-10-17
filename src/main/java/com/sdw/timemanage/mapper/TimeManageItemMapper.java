@@ -1,17 +1,15 @@
 package com.sdw.timemanage.mapper;
 
 import com.sdw.timemanage.pojo.TimeManageItem;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TimeManageItemMapper {
     int deleteByPrimaryKey(Long id);
-
-    int insert(TimeManageItem record);
 
     int insertSelective(TimeManageItem record);
 
     TimeManageItem selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(TimeManageItem record);
-
-    int updateByPrimaryKey(TimeManageItem record);
 }

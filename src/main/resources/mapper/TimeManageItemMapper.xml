@@ -3,7 +3,7 @@
 <mapper namespace="com.sdw.timemanage.mapper.TimeManageItemMapper">
   <resultMap id="BaseResultMap" type="com.sdw.timemanage.pojo.TimeManageItem">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="BIGINT" property="name" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="describes" jdbcType="VARCHAR" property="describes" />
     <result column="is_del" jdbcType="TINYINT" property="isDel" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -14,6 +14,7 @@
   <sql id="Base_Column_List">
     id, `name`, describes, is_del, create_time, create_user, update_time, update_user
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -24,14 +25,6 @@
     delete from time_manage_item
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.sdw.timemanage.pojo.TimeManageItem">
-    insert into time_manage_item (id, `name`, describes, 
-      is_del, create_time, create_user, 
-      update_time, update_user)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=BIGINT}, #{describes,jdbcType=VARCHAR}, 
-      #{isDel,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR})
-  </insert>
   <insert id="insertSelective" parameterType="com.sdw.timemanage.pojo.TimeManageItem">
     insert into time_manage_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -65,7 +58,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="name != null">
-        #{name,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="describes != null">
         #{describes,jdbcType=VARCHAR},
@@ -91,7 +84,7 @@
     update time_manage_item
     <set>
       <if test="name != null">
-        `name` = #{name,jdbcType=BIGINT},
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="describes != null">
         describes = #{describes,jdbcType=VARCHAR},
@@ -112,17 +105,6 @@
         update_user = #{updateUser,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.sdw.timemanage.pojo.TimeManageItem">
-    update time_manage_item
-    set `name` = #{name,jdbcType=BIGINT},
-      describes = #{describes,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_user = #{updateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
